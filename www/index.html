@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <!-- load Ink's CSS -->
+        <link rel="stylesheet" type="text/css" href="css/ink-flex.min.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+        
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
+        <title>Braufreund</title>
+    </head>
+    <body>
+        <div class="container fw-700 extralarge">
+            <div class="area title">
+                <h1>Title</title>
+            </div>
+            <div class="area instruction">
+                <div class="text bottom-space"></div>
+                <h2 class="temperature">60 &deg;C</h2>
+                <h2 class="minutes">10:00</h2>
+                <button class="ink-button blue" data-action="timer">Start</button>
+            </div>
+            <div class="area action">
+                <button class="ink-button grey left-space" data-action="back">Zurück</button>
+                <button class="ink-button green push-right right-space" data-action="done">Gemacht</button>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
