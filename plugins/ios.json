@@ -15,12 +15,63 @@
         },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "ch.urbanetter.braufreund"
-        }
-    },
-    "dependent_plugins": {
+        },
+        "org.apache.cordova.battery-status": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.contacts": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "ch.urbanetter.braufreund"
         },
+        "org.apache.cordova.device-motion": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.device-orientation": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.geolocation": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.globalization": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.media": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        },
+        "org.apache.cordova.vibration": {
+            "PACKAGE_NAME": "ch.urbanetter.braufreund"
+        }
+    },
+    "dependent_plugins": {
         "cordova-plugin-app-event": {
             "PACKAGE_NAME": "ch.urbanetter.braufreund"
         }
