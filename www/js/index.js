@@ -8,7 +8,6 @@ var app = {
 
     initialize: function() {
         this.bindEvents();
-        this.updateDisplay();
     },
 
     bindEvents: function() {
@@ -39,9 +38,33 @@ var app = {
             event.preventDefault();
             
             $(this).prop('disabled', true);
+            self.seconds = self.recipe[self.step].minutes * 60;
+
+            if (typeof(cordova) == "object") {
+                var timeExpired = new Date(new Date().getTime() + self.seconds * 1000);
+                cordova.plugins.notification.local.schedule({
+                    id: 1,
+                    text: "Es geht weiter!",
+                    at: timeExpired
+                });                
+            }
+
             self.intervalId = setInterval(function() {
                 self.tick();
             }, 1000);
+        });
+
+        document.addEventListener("deviceready", function(){
+            cordova.plugins.notification.local.on("click", function (notification, state) {
+                self.step++;
+                self.updateDisplay();
+            });
+            self.updateDisplay();
+        });
+
+        // for running locally
+        $(document).ready(function(){
+            self.updateDisplay();
         });
     },
 
@@ -53,15 +76,22 @@ var app = {
         if (this.seconds == 0) {
             clearInterval(this.intervalId);
             $('[data-action="timer"]').prop('disabled', false);
-            this.step++;
-            this.updateDisplay();
         }
     },
 
     updateDisplay: function() {
+        // clear interval since we're at a new step
+        clearInterval(this.intervalId);
+        $('[data-action="timer"]').prop('disabled', false);
+
         var step = this.recipe[this.step];
         $('.title h1').text(step.title);
         $('.instruction .text').text(step.instruction);
+        if (step.volume) {
+            $('.instruction .volume').html(step.volume + " Liter").show();
+        } else {
+            $('.instruction .volume').hide();
+        }
         if (step.temperature) {
             $('.instruction .temperature').html(step.temperature + " &deg;C").show();
         } else {
@@ -70,7 +100,6 @@ var app = {
         if (step.minutes) {
             $('.instruction .minutes').html(step.minutes + ":00").show();
             $('.instruction button').show();
-            this.seconds = step.minutes * 60;
         } else {
             $('.instruction .minutes').hide();
             $('.instruction button').hide();
@@ -90,25 +119,5 @@ var app = {
         }
     },
 
-    recipe: [
-        {
-            title: "Einmaischen",
-            instruction: "Erhitze 8 Liter Wasser auf 60 Grad",
-            temperature: 60
-        },
-        {
-            title: "Einmaischen",
-            instruction: "Gebe das Malz dazu, rühre alles ein"
-        },
-        {
-            title: "Einmaischen",
-            instruction: "Lasse den Maisch wärend 20 Minuten auf 55 Grad kochen",
-            temperature: 55,
-            minutes: 1
-        },
-        {
-            title: "Scho färtig",
-            instruction: "Isch ja nur ä Demo, gäll :)"
-        },
-    ]
+    recipe: recipes.ipa
 };

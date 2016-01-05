@@ -2,10 +2,10 @@
 <widget id="ch.urbanetter.braufreund" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Braufreund</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Beer recipe reader
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author href="http://www.urbanetter.ch">
+        Urban Etter
     </author>
     <content src="index.html" />
     <preference name="permissions" value="none" />
@@ -41,6 +41,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="de.appplant.cordova.plugin.local-notification" />
     <plugin name="cordova-plugin-native-transitions" source="npm" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
