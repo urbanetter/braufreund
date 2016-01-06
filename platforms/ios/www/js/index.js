@@ -4,7 +4,7 @@ var app = {
 
     seconds: 0,
 
-    intervalId: null,
+    intervalId: 0,
 
     initialize: function() {
         this.bindEvents();
@@ -37,26 +37,34 @@ var app = {
         $('[data-action="timer"]').on('click', function(event) {
             event.preventDefault();
             
-            $(this).prop('disabled', true);
-            self.seconds = self.recipe[self.step].minutes * 60;
+            if (self.intervalId) {
+                // we're stopping
+                self.updateDisplay();               
+            } else {
+                self.seconds = self.recipe[self.step].minutes * 60;
 
-            if (typeof(cordova) == "object") {
-                var timeExpired = new Date(new Date().getTime() + self.seconds * 1000);
-                cordova.plugins.notification.local.schedule({
-                    id: 1,
-                    text: "Es geht weiter!",
-                    at: timeExpired
-                });                
+                if (typeof(cordova) == "object") {
+                    var timeExpired = new Date(new Date().getTime() + self.seconds * 1000);
+                    cordova.plugins.notification.local.schedule({
+                        id: 1,
+                        text: "Es geht weiter!",
+                        at: timeExpired,
+                        data: {step: self.step + 1}
+                    });                
+                }
+
+                self.intervalId = setInterval(function() {
+                    self.tick();
+                }, 1000);
+
+                $(this).text('Stop');
+
             }
-
-            self.intervalId = setInterval(function() {
-                self.tick();
-            }, 1000);
         });
 
         document.addEventListener("deviceready", function(){
             cordova.plugins.notification.local.on("click", function (notification, state) {
-                self.step++;
+                self.step = notification.data.step;
                 self.updateDisplay();
             });
             self.updateDisplay();
@@ -82,7 +90,11 @@ var app = {
     updateDisplay: function() {
         // clear interval since we're at a new step
         clearInterval(this.intervalId);
-        $('[data-action="timer"]').prop('disabled', false);
+        this.intervalId = 0;
+        if (typeof(cordova) == "object") {
+            cordova.plugins.notification.local.cancel(1);
+        }
+        $('[data-action="timer"]').text('Start');
 
         var step = this.recipe[this.step];
         $('.title h1').text(step.title);
